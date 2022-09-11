@@ -34,3 +34,6 @@ function getDataFromResultsKey(getUrlApi) {
         })
 }
 
+function getMoviesCategory(url){
+    let url1 = url
+}
