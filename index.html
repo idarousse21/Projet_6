@@ -4,49 +4,50 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src = "js/scripts.js" defer></script>
+    <link rel="stylesheet" href="css/style.css">
     <title>Document</title>
 </head>
+<header>
+    <h1> JustStreamit</h1>
+    
+    <nav class="nav">
+        <ul>
+            <li> <a href="index.html"> Accueil</a> </li>
+            <li> Catégories </li>
+        </ul>
+    </nav>
+</header>
 <body>
-    
-    <div id="abc">
+    <h2>Best Movie</h2>
+    <div id="bestMovie">
+        <img src="image/logo.png" alt="movieJacket" onclick="">
     </div>
-    
-    <!-- <div id="abc"></div>
-    <div id="abc"></div> -->
-    <!-- <div id="output"></div> -->
-    <!-- <div id="image_url"></div> -->
-</body>
-</html>
-
-
-
+    <h2>Best Films</h2>
+    <div id="bestMovies"></div>
+    <h2>Comedy</h2>
+    <div id="comedy"></div>
+    <h2>Drama</h2>
+    <div id="drama"></div>
+    <h2>Animation</h2>
+    <div id="animation"></div>
    
+   <!-- Trigger/Open The Modal -->
+   <button id="myBtn">Open Modal</button>
+   
+   <div id="comedy"></div>
 
-    <!-- <h2>Modal Example</h2>
-
-    <button id="myBtn"> <img src="image/lion.jpg" width="200" height="300"> </button>
-
-    <div id="myModal" class="modal">
-
-        <div class="modal-content">
-            <img src="image/lion.jpg" width="200" height="300">
-            <p> Film: Le roi lion <br />
-                Genre: Animation <br />
-                Date de sortie: 1994 <br />
-                Rated: 3 <br />
-                Score Imdb: 8.5/10<br />
-                Réalisateur: Ha<br />
-                Durée: 90min <br />
-                Pays d'origine: USA <br />
-                Résultat box office: 300 Millions <br />
-                Résumé du film: Un lionceau prince héritier est convaincu par son oncle perfide qu'il a causé la mort de
-                son père. Désespéré, il s'enfuit en exil pour apprendre seulement à l'âge adulte son identité et ses
-                responsabilités. <br />
-            </p>
-            <span class="close">&times;</span>
-            <p>Some text in the Modal..</p>
-        </div>
-
-    </div> -->
-
+   <!-- The Modal -->
+   <div id="myModal" class="modal">
+   
+     <!-- Modal content -->
+     <div class="modal-content">
+       <span class="close">&times;</span>
+       <p>Some text in the Modal..</p>
+       
+       
+     </div>
+   
+   </div>
+</body>
+<script src = "test.js" defer></script>
+   </html>
