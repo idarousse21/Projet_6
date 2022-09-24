@@ -1,104 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
-    <title>Document</title>
+    <script src="test.js" defer></script>
+    <title>JustStreamit</title>
 </head>
-<header>
-    <h1> JustStreamit</h1>
-    
-    <nav class="nav">
-        <ul>
-            <li> <a href="index.html"> Accueil</a> </li>
-            <li> Catégories </li>
-        </ul>
-    </nav>
-</header>
+
 <body>
-    <h2>Best Movie</h2>
-    <div id="bestMovie"></div>
-    <div id="filmCategory">
-        <h2>Best Films</h2>
-        <div id="bestMovies">
-            <div class="arrow left" onclick="moveRight('bestMovies')">&#8249;</div>
-            <div class="arrow right" onclick="moveLeft('bestMovies')">&#8250;</div>
-            <div class="movieItem"><img src="image/logo.png"></div>
-            <div class="movieItem"><img src="image/logo.png"></div>
-            <div class="movieItem"><img src="image/logo.png"></div>
-            <div class="movieItem"><img src="image/logo.png"></div>
-            <div class="movieItem"><img src="image/logo.png"></div>
-            <div class="movieItem"><img src="image/logo.png"></div>
-            <div class="movieItem"><img src="image/logo.png"></div>
-        </div>
-        
-        <h2>Comedy</h2>
-        <div id="comedy">
-            <div class="arrow left" onclick="moveRight('comedy')">&#8249;</div>
-            <div class="arrow right" onclick="moveLeft('comedy')">&#8250;</div>
-            
-            <div class="movieItem"><img src="image/logo.png" onclick=""></div>
-            <div class="movieItem"><img src="image/logo.png" onclick=""></div>
-            <div class="movieItem"><img src="image/logo.png" onclick=""></div>
-            <div class="movieItem"><img src="image/logo.png" onclick=""></div>
-            <div class="movieItem"><img src="image/logo.png" onclick=""></div>
-            <div class="movieItem"><img src="image/logo.png" onclick=""></div>
-            <div class="movieItem"><img src="image/logo.png" onclick=""></div>
-        </div>
-        
-        <h2>Drama</h2>
-        <div id="drama">
-            <div class="arrow left" onclick="moveRight('drama')">&#8249;</div>
-            <div class="arrow right" onclick="moveLeft('drama')">&#8250;</div>
-            <div class="movieItem"><img src="image/logo.png"></div>
-            <div class="movieItem"><img src="image/logo.png"></div>
-            <div class="movieItem"><img src="image/logo.png"></div>
-            <div class="movieItem"><img src="image/logo.png"></div>
-            <div class="movieItem"><img src="image/logo.png"></div>
-            <div class="movieItem"><img src="image/logo.png"></div>
-            <div class="movieItem"><img src="image/logo.png"></div>
-        </div>
-        <h2>Animation</h2>
-        <div id="sci-fi">
-            <div class="arrow left" onclick="moveRight('sci-fi')">&#8249;</div>
-            <div class="arrow right" onclick="moveLeft('sci-fi')">&#8250;</div>
-            <div class="movieItem"><img src="image/logo.png"></div>
-            <div class="movieItem"><img src="image/logo.png"></div>
-            <div class="movieItem"><img src="image/logo.png"></div>
-            <div class="movieItem"><img src="image/logo.png"></div>
-            <div class="movieItem"><img src="image/logo.png"></div>
-            <div class="movieItem"><img src="image/logo.png"></div>
-            <div class="movieItem"><img src="image/logo.png"></div>
+    <header>
+        <h1> JustStreamit</h1>
+
+        <nav class="nav">
+            <ul>
+                <li> <a href="index.html"> Accueil</a> </li>
+                <li> <a href=""> Catégories</a> </li>
+            </ul>
+        </nav>
+    </header>
+
+    <div id="bestMovie">
+        <div class="leftOfBestMovie">
+            <h2 id="titleBestMovie"></h2>
+            <div class="button">
+                <button class="buttonInfo"> Plus d'infos</button>
+                <button class="buttonPlay">Play &#9658;</button>
+            </div>
         </div>
     </div>
-        
-        
-      
-        
-        <!-- The Modal -->
-        <div id="myModal" class="modal">
-            <!-- Modal content -->
-            <div id="modal-content">
-                <span class="close">&times;</span>
-              <img  src="image/logo.png">
-              <p id ="titleModal"></p>
-              <ul>
-                <li id="genre"></li>
-                <li id="releaseDate"></li>
-                <li id="rated"></li>
-                <li id="scoreImdb"></li>
-                <li id="director"></li>
-                <li id="actors"></li>
-                <li id="countries"></li>
-                <li id="boxOffice"></li>
-                <li id="description"></li>
-              </ul>
-          </div>
-        
+    <div id="filmCategory">
+        <h2>Best Movies</h2>
+        <div id="bestMovies">
+            <div class="arrow left" onclick="moveLeft('bestMovies')">&#8249;</div>
+            <div class="arrow right" onclick="moveRight('bestMovies')">&#8250;</div>
+
         </div>
 
+        <h2>Comedy</h2>
+        <div id="comedy">
+            <div class="arrow left" onclick="moveLeft('comedy')">&#8249;</div>
+            <div class="arrow right" onclick="moveRight('comedy')">&#8250;</div>
+
+        </div>
+
+        <h2>Drama</h2>
+        <div id="drama">
+            <div class="arrow left" onclick="moveLeft('drama')">&#8249;</div>
+            <div class="arrow right" onclick="moveRight('drama')">&#8250;</div>
+
+        </div>
+        <h2>Sci-fi</h2>
+        <div id="sci-fi">
+            <div class="arrow left" onclick="moveLeft('sci-fi')">&#8249;</div>
+            <div class="arrow right" onclick="moveRight('sci-fi')">&#8250;</div>
+
+        </div>
+    </div>
+    <div id="myModal" class="modal">
+        <div id="modal-content">
+            <img src="image/logo.png" alt="">
+            <div class="infosModal">
+                <p id="titleModal"></p>
+                <ul>
+                    <li id="genre"></li>
+                    <li id="releaseDate"></li>
+                    <li id="rated"></li>
+                    <li id="scoreImdb"></li>
+                    <li id="director"></li>
+                    <li id="actors"></li>
+                    <li id="countries"></li>
+                    <li id="boxOffice"></li>
+                    <li id="description"></li>
+                </ul>
+            </div>
+            <span class="close">&times;</span>
+        </div>
+
+    </div>
+
 </body>
+
 </html>
-<script src = "test.js" defer></script>
