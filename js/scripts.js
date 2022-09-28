@@ -1,7 +1,7 @@
 const url = "http://localhost:8000/api/v1/titles/?"
 const queryStr = "genre=comedy&genre=sci-fi&genre=drama&sort_by=-imdb_score"
 const querySearch = new URLSearchParams(queryStr)
-
+p = querySearch.get("genre") == "comedy"
 function urlSearch(sort) {
     for (const [key, value] of querySearch) {
         if (value == sort) {
@@ -26,16 +26,14 @@ function displayBestMovie() {
             img.setAttribute('onclick', `openModal(${bestFilm.id})`)
             category.append(img)
             buttonInfo.setAttribute('onclick', `openModal(${bestFilm.id})`)
-            
-
-
-        })
+        }
+        )
 }
 
 
 function getUrlPagesOfCategory(sort) {
-    let urlPage1 = `${urlSearch(sort)}&page_size=7&sort_by=-imdb_score`
-    return fetch(urlPage1)
+    let urlPage = `${urlSearch(sort)}&page_size=7&sort_by=-imdb_score`
+    return fetch(urlPage)
         .then(response => response.json())
         .then(data => {
             return data.results
@@ -44,7 +42,7 @@ function getUrlPagesOfCategory(sort) {
 
 async function displayFilmsCategory(sort, category) {
     let data = await getUrlPagesOfCategory(sort)
-    let categoryId = document.getElementById(category)
+    let categoryById = document.getElementById(category)
     for (let number = 0; number < data.length; number++) {
         let div = document.createElement("div")
         div.className = "movieitem"
@@ -52,7 +50,7 @@ async function displayFilmsCategory(sort, category) {
         img.src = data[number].image_url
         img.alt = data[number].title
         div.append(img)
-        categoryId.append(div)
+        categoryById.append(div)
         img.setAttribute('onclick', `openModal(${data[number].id})`)
 
     };
@@ -122,18 +120,26 @@ function openModal(id) {
         })
 }
 
-
+const media = window.matchMedia("(max-width: 1280px)")
 
 function moveRight(category) {
     let slider = document.getElementById(category)
     let textIndent = parseInt(slider.style.textIndent || 0)
     slider.style.textIndent = (textIndent - 25) + "%"
     slider.getElementsByClassName('arrow left')[0].style.visibility = "visible"
-    if (slider.style.textIndent >= `-70%`) {
-        slider.style.textIndent = `-70%`;
-        slider.getElementsByClassName('arrow right')[0].style.visibility = "hidden"
-    };
-    return true;
+    if (media.matches) {
+        slider.style.textIndent = (textIndent - 50) + "%"
+        if (slider.style.textIndent >= `-500%`) {
+            slider.style.textIndent = `-380%`
+            slider.getElementsByClassName('arrow right')[0].style.visibility = "hidden"
+        }
+    } else {
+        if (slider.style.textIndent >= `-50%`) {
+            slider.style.textIndent = `-50%`
+            slider.getElementsByClassName('arrow right')[0].style.visibility = "hidden"
+        }
+    }
+    return true
 
 }
 
@@ -143,11 +149,19 @@ function moveLeft(category) {
     let textIndent = parseInt(slider.style.textIndent || 0)
     slider.style.textIndent = (textIndent + 25) + "%"
     slider.getElementsByClassName('arrow right')[0].style.visibility = "visible"
-    if (slider.style.textIndent >= `0%`) {
-        slider.style.textIndent = `0%`
-        slider.getElementsByClassName('arrow left')[0].style.visibility = "hidden"
-    };
+    if (media.matches) {
+        slider.style.textIndent = (textIndent + 50) + "%"
+        if (slider.style.textIndent >= `0%`) {
+            slider.style.textIndent = `0%`
+            slider.getElementsByClassName('arrow left')[0].style.visibility = "hidden"
+        }
+    } else {
+        if (slider.style.textIndent >= `0%`) {
 
-    return true;
-};
+            slider.style.textIndent = `0%`
+            slider.getElementsByClassName('arrow left')[0].style.visibility = "hidden"
+        }
+    }
+    return true
+}
 

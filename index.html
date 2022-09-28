@@ -7,17 +7,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
     <script src="js/scripts.js" defer></script>
+
     <title>JustStreamit</title>
 </head>
 
 <body>
     <header>
         <h1> JustStreamit</h1>
-
         <nav class="nav">
             <ul>
                 <li> <a href="index.html"> Accueil</a> </li>
-                <li> <a href=""> Catégories</a> </li>
+                <li> <a href="#filmCategory"> Catégories</a> </li>
             </ul>
         </nav>
     </header>
@@ -32,33 +32,32 @@
         </div>
     </div>
     <div id="filmCategory">
+
         <h2>Best Movies</h2>
         <div id="bestMovies">
             <div class="arrow left" onclick="moveLeft('bestMovies')">&#8249;</div>
             <div class="arrow right" onclick="moveRight('bestMovies')">&#8250;</div>
-
         </div>
 
         <h2>Comedy</h2>
         <div id="comedy">
             <div class="arrow left" onclick="moveLeft('comedy')">&#8249;</div>
             <div class="arrow right" onclick="moveRight('comedy')">&#8250;</div>
-
         </div>
 
         <h2>Drama</h2>
         <div id="drama">
             <div class="arrow left" onclick="moveLeft('drama')">&#8249;</div>
             <div class="arrow right" onclick="moveRight('drama')">&#8250;</div>
-
         </div>
+
         <h2>Sci-fi</h2>
         <div id="sci-fi">
             <div class="arrow left" onclick="moveLeft('sci-fi')">&#8249;</div>
             <div class="arrow right" onclick="moveRight('sci-fi')">&#8250;</div>
-
         </div>
     </div>
+
     <div id="myModal" class="modal">
         <div id="modal-content">
             <img src="image/logo.png" alt="">
@@ -78,9 +77,7 @@
             </div>
             <span class="close">&times;</span>
         </div>
-
     </div>
-
 </body>
 
 </html>
