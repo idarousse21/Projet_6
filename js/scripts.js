@@ -1,76 +1,66 @@
-const url = "http://localhost:8000/api/v1/titles/?"
-const queryStr = "genre=comedy&genre=sci-fi&genre=drama&sort_by=-imdb_score"
-const querySearch = new URLSearchParams(queryStr)
-p = querySearch.get("genre") == "comedy"
-function urlSearch(sort) {
-    for (const [key, value] of querySearch) {
-        if (value == sort) {
-            search = `${key}=${value}`
-            return `${url}${search}`
-        }
-    }
+const media = window.matchMedia("(max-width: 1280px)")
+function buildUrl(params){
+    const url = "http://localhost:8000/api/v1/titles/?"
+    const querySearch = new URLSearchParams(params)
+    return url + querySearch.toString()
 }
+
 function displayBestMovie() {
-    let urlBestMovie = "http://localhost:8000/api/v1/titles/?sort_by=-imdb_score"
+    let urlBestMovie = buildUrl({"sort_by":"-imdb_score"})
     fetch(urlBestMovie)
         .then(response => response.json())
         .then(data => {
             let bestFilm = data.results[0]
-            let category = document.getElementById("bestMovie")
-            let titleBestMovie = document.getElementById("titleBestMovie")
+            let divCategory = document.getElementById("bestMovie")
+            
+            let divTitleBestMovie = document.getElementById("titleBestMovie")
+            // a changer
             let buttonInfo = document.getElementsByTagName("button")[0]
             let img = document.createElement("img")
-            titleBestMovie.innerText = bestFilm.title
+            divTitleBestMovie.innerText = bestFilm.title
             img.src = bestFilm.image_url
             img.alt = bestFilm.title
             img.setAttribute('onclick', `openModal(${bestFilm.id})`)
-            category.append(img)
+            divCategory.append(img)
             buttonInfo.setAttribute('onclick', `openModal(${bestFilm.id})`)
         }
         )
 }
 
 
-function getUrlPagesOfCategory(sort) {
-    let urlPage = `${urlSearch(sort)}&page_size=7&sort_by=-imdb_score`
-    return fetch(urlPage)
+function getFilmsFromCategory(category) {
+    let params = {"page_size":"7","sort_by":"-imdb_score"}
+    if (category != null){
+        params["genre"]= category
+    }
+    
+    let url= buildUrl(params)
+    return fetch(url)
         .then(response => response.json())
         .then(data => {
             return data.results
         })
 }
 
-async function displayFilmsCategory(sort, category) {
-    let data = await getUrlPagesOfCategory(sort)
-    let categoryById = document.getElementById(category)
-    for (let number = 0; number < data.length; number++) {
+async function displayFilmsCategory(category,divId) {
+    let films = await getFilmsFromCategory(category)
+    let divCategory = document.getElementById(divId)
+    for (let number = 0; number < films.length; number++) {
         let div = document.createElement("div")
         div.className = "movieitem"
         let img = document.createElement("img")
-        img.src = data[number].image_url
-        img.alt = data[number].title
+        img.src = films[number].image_url
+        img.alt = films[number].title
         div.append(img)
-        categoryById.append(div)
-        img.setAttribute('onclick', `openModal(${data[number].id})`)
+        divCategory.append(div)
+        img.setAttribute('onclick', `openModal(${films[number].id})`)
 
     };
 
 };
 
 
-displayBestMovie("-imdb_score", "bestMovie")
-displayFilmsCategory("-imdb_score", "bestMovies")
-displayFilmsCategory("comedy", "comedy")
-displayFilmsCategory("drama", "drama")
-displayFilmsCategory("sci-fi", "sci-fi")
-
-
-
-
-
-
-
-function openModal(id) {
+function openModal(filmId) {
     const modal = document.getElementById("myModal");
     modal.style.display = "block"
     let span = document.getElementsByClassName("close")[0];
@@ -78,12 +68,15 @@ function openModal(id) {
         modal.style.display = "none";
     }
     window.onclick = function (event) {
-        console.log(event.target)
         if (event.target == modal) {
             modal.style.display = "none";
         }
     }
-    let url = "http://localhost:8000/api/v1/titles/" + id
+    let url = "http://localhost:8000/api/v1/titles/" + filmId
+    displayMovieInfo(url)
+}
+
+function displayMovieInfo (url){
     let modalContent = document.getElementById("modal-content")
     let titleFilm = document.getElementById("titleModal")
     let genre = document.getElementById("genre")
@@ -115,12 +108,10 @@ function openModal(id) {
                 boxOffice.innerText = `Box-office: ${data.worldwide_gross_income} d'entrées`
             }
             description.innerText = `Description: ${data.description}`
-
-
         })
-}
+    }
 
-const media = window.matchMedia("(max-width: 1280px)")
+
 
 function moveRight(category) {
     let slider = document.getElementById(category)
@@ -147,21 +138,22 @@ function moveRight(category) {
 function moveLeft(category) {
     let slider = document.getElementById(category)
     let textIndent = parseInt(slider.style.textIndent || 0)
-    slider.style.textIndent = (textIndent + 25) + "%"
     slider.getElementsByClassName('arrow right')[0].style.visibility = "visible"
     if (media.matches) {
-        slider.style.textIndent = (textIndent + 50) + "%"
-        if (slider.style.textIndent >= `0%`) {
-            slider.style.textIndent = `0%`
-            slider.getElementsByClassName('arrow left')[0].style.visibility = "hidden"
-        }
+        slider.style.textIndent = (textIndent + 75) + "%"
     } else {
-        if (slider.style.textIndent >= `0%`) {
-
-            slider.style.textIndent = `0%`
-            slider.getElementsByClassName('arrow left')[0].style.visibility = "hidden"
-        }
+        slider.style.textIndent = (textIndent + 25) + "%"
+    }
+    if (slider.style.textIndent >= `0%`) {
+        slider.style.textIndent = `0%`
+        slider.getElementsByClassName('arrow left')[0].style.visibility = "hidden"
     }
     return true
 }
 
+
+displayBestMovie()
+displayFilmsCategory(null, "bestMovies")
+displayFilmsCategory("comedy", "comedy")
+displayFilmsCategory("drama", "drama")
+displayFilmsCategory("sci-fi", "sci-fi")
