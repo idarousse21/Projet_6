@@ -1,4 +1,5 @@
 const media = window.matchMedia("(max-width: 1280px)")
+
 function buildUrl(params){
     const url = "http://localhost:8000/api/v1/titles/?"
     const querySearch = new URLSearchParams(params)
@@ -12,9 +13,7 @@ function displayBestMovie() {
         .then(data => {
             let bestFilm = data.results[0]
             let divCategory = document.getElementById("bestMovie")
-            
             let divTitleBestMovie = document.getElementById("titleBestMovie")
-            // a changer
             let buttonInfo = document.getElementsByTagName("button")[0]
             let img = document.createElement("img")
             divTitleBestMovie.innerText = bestFilm.title
